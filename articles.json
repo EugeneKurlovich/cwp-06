@@ -1,0 +1,24 @@
+﻿[
+  {
+    "id" : 0,
+    "title" : "N",
+    "text" : "textNews1",
+    "date" : "Dec 25, 2017",
+    "author" : "Eugene"
+  },
+  {
+    "id" : 2,
+    "title" : "New",
+    "text" : "textNews3",
+    "date" : "Dec 25, 2017",
+    "author" : "Ivan"
+  },
+  {
+    "id" : 1,
+    "title" : "Ne",
+    "text" : "textNews2",
+    "date" : "Dec 25, 2017",
+    "author" : "Zhenya"
+    
+  }
+]
