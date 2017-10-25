@@ -12,8 +12,48 @@ module.exports = {
     deleteArt
 };
 
-function readAll(req, res, payload, cb) {
-    cb(null, _articles);
+const sortFieldDefault = "date";
+const sortOrderDefault = "desc";
+
+
+function readAll(req, res, payload, cb) 
+{
+    let sortField = payload.sortField === undefined ? sortFieldDefault : payload.sortField;
+    let sortOrder = payload.sortOrder === undefined ? sortOrderDefault : payload.sortOrder;
+   
+    let response = {
+        "items" : _articles.sort((a, b) => {
+            switch (sortField) {
+                case "id" : {
+                    if (a.id > b.id) return sortOrder === "asc" ? 1 : -1;
+                    if (a.id === b.id) return 0;
+                    if (a.id < b.id) return sortOrder === "asc" ? -1 : 1;
+                }
+                case "title" : {
+                    if (a.title > b.title) return sortOrder === "asc" ? 1 : -1;
+                    if (a.title === b.title) return 0;
+                    if (a.title < b.title) return sortOrder === "asc" ? -1 : 1;
+                }
+                case "text" : {
+                    if (a.text > b.text) return sortOrder === "asc" ? 1 : -1;
+                    if (a.text === b.text) return 0;
+                    if (a.text < b.text) return sortOrder === "asc" ? -1 : 1;
+                }
+                case "date" : {
+                    if (a.date > b.date) return sortOrder === "asc" ? 1 : -1;
+                    if (a.date === b.date) return 0;
+                    if (a.date < b.date) return sortOrder === "asc" ? -1 : 1;
+                }
+                case "author" : {
+                    if (a.author > b.author) return sortOrder === "asc" ? 1 : -1;
+                    if (a.author === b.author) return 0;
+                    if (a.author < b.author) return sortOrder === "asc" ? -1 : 1;
+                }
+            }
+        })
+    };
+
+    cb(null, response);
 }
 
 function read(req, res, payload, cb) {
