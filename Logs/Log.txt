@@ -1,12 +1,25 @@
-2017-10-25 15:10:27: 
+2017-10-30 19:37:33: 
 /api/articles/readAll
 {
 	"sortField" : "id",
-	"sortOrder" : "asc"
+	"sortOrder" : "asc",
+	"limit" : 1
 }
-2017-10-25 15:10:37: 
+2017-10-30 19:39:01: 
 /api/articles/readAll
 {
 	"sortField" : "id",
-	"sortOrder" : "desc"
+	"sortOrder" : "asc",
+	"limit" : 1,
+	"page" : 2,
+	"pages" : 3
+}
+2017-10-30 19:39:38: 
+/api/articles/readAll
+{
+	"sortField" : "id",
+	"sortOrder" : "asc",
+	"limit" : 2,
+	"page" : 2,
+	"pages" : 3
 }
