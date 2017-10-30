@@ -3,7 +3,8 @@ const fs = require('fs');
 const articlesControllers = require('./controllers/articles');
 const commentsController = require('./controllers/comments');
 
-let LogPath = "./Logs/Log.txt";
+
+let LogPath = "./Logs/log.txt";
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -16,12 +17,12 @@ const handlers = {
     '/api/articles/update': articlesControllers.update,
     '/api/articles/delete': articlesControllers.deleteArt,
     '/api/comments/create': commentsController.create,
-    '/api/comments/deleteCom': commentsController.deleteCom
+    '/api/comments/deleteCom': commentsController.deleteCom,
+    '/api/logs':getJSONlogs
 };
 
 function Log(data) {
-    let date = new Date();
-    fs.write(File, date.toLocaleString() + ": \r\n" + data + '\r\n', function (err) {
+    fs.write(File, data, function (err) {
         if (err) {
         }
     });
@@ -72,7 +73,7 @@ function parseBodyJson(req, cb) {
         body.push(chunk);
     }).on('end', function () {
         body = Buffer.concat(body).toString();
-        Log(req.url + '\r\n' + body);
+        Log(body);
         console.log("body : " + body);
         if (body !== "") {
             params = JSON.parse(body);
@@ -82,4 +83,8 @@ function parseBodyJson(req, cb) {
             cb(null, null);
         }
     });
+}
+
+function getJSONlogs(req, res, payload, cb) {
+    return fs.readFile(LogPath, function (err, data) { cb(null, data.toString()) });
 }

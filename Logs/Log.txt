@@ -1,33 +1,3 @@
-2017-10-30 20:43:27: 
-/api/articles/readAll
-{
-	"sortField" : "id",
-	"sortOrder" : "asc",
-	"includeDeps" : false
-}
-2017-10-30 20:43:35: 
-/api/articles/readAll
-{
-	"sortField" : "id",
-	"sortOrder" : "asc",
-	"includeDeps" : true
-}
-2017-10-30 20:43:42: 
-/api/articles/readAll
-{
-	"sortField" : "id",
-	"sortOrder" : "asc",
-	"includeDeps" : false
-}
-2017-10-30 20:43:49: 
-/api/articles/readAll
-{
-	"sortField" : "id",
-	"sortOrder" : "asc",
-	"includeDeps" : true
-}
-2017-10-30 20:43:58: 
-/api/articles/readAll
 {
 	"sortField" : "id",
 	"sortOrder" : "desc",
