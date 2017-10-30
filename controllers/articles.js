@@ -12,62 +12,71 @@ module.exports = {
     deleteArt
 };
 
-let sortField = "date";
-let sortOrder = "asc";
-let page = 1;
-let limit = 10;
-let includeDeps = false;
-
+const sortFieldDefault = "date";
+const sortOrderDefault = "desc";
+const pageDefault = 1;
+const limitDefault = 10;
+const includeDepsDefault = true;
 
 function readAll(req, res, payload, cb) 
 {
-    payload.page === undefined ? page = 1 : page = payload.page;
-    payload.limit === undefined ? limit = 10 : limit = payload.limit;
-    payload.sortOrder === undefined ? sortOrder = "asc" : sortOrder = payload.sortOrder; 
-    if (payload.sortField) {
-        sortField = payload.sortField;
-    }
-    _articles.sort((a, b) => {
-        if (a[sortField] > b[sortField]) {
-            return 1;
+   let sortField = payload.sortField === undefined ? sortFieldDefault : payload.sortField;
+    let sortOrder = payload.sortOrder === undefined ? sortOrderDefault : payload.sortOrder;
+    let page      = payload.page === undefined ? pageDefault : payload.page;
+    let limit     = payload.limit === undefined ? limitDefault : payload.limit;
+    let includeDeps = payload.includeDeps === undefined ? includeDepsDefault : payload.includeDeps;
+
+ let newArticles = [];
+   for (let i = 0; i < _articles.length; i++) {
+        newArticles.push(Object.assign({}, _articles[i]));
+
+        if (!includeDeps)
+        {
+            newArticles[i].Comments = undefined;
         }
-        if (a[sortField] < b[sortField]) {
-            return -1;
-        }
-        if (a[sortField] === b[sortField]) {
-            return 0;
-        }
-    });
-
-
-    let newArticles = [];
-
-    for (let i = 0; i < _articles.length; i++) 
-    {
-        let y = _articles[i];
-        newArticles.push(y);
-    }
-    newArticles = newArticles.slice((page - 1) * limit, (page - 1) * limit + limit);
-
-    if (sortOrder === "desc") {
-       newArticles.reverse();
     }
 
-     let meta = 
-     {
+    let it = {
+        "items" : newArticles.sort((a, b) => {
+            switch (sortField) {
+                case "id" : {
+                    if (a.id > b.id) return sortOrder === "asc" ? 1 : -1;
+                    if (a.id === b.id) return 0;
+                    if (a.id < b.id) return sortOrder === "asc" ? -1 : 1;
+                }
+                case "title" : {
+                    if (a.title > b.title) return sortOrder === "asc" ? 1 : -1;
+                    if (a.title === b.title) return 0;
+                    if (a.title < b.title) return sortOrder === "asc" ? -1 : 1;
+                }
+                case "text" : {
+                    if (a.text > b.text) return sortOrder === "asc" ? 1 : -1;
+                    if (a.text === b.text) return 0;
+                    if (a.text < b.text) return sortOrder === "asc" ? -1 : 1;
+                }
+                case "date" : {
+                    if (a.date > b.date) return sortOrder === "asc" ? 1 : -1;
+                    if (a.date === b.date) return 0;
+                    if (a.date < b.date) return sortOrder === "asc" ? -1 : 1;
+                }
+                case "author" : {
+                    if (a.author > b.author) return sortOrder === "asc" ? 1 : -1;
+                    if (a.author === b.author) return 0;
+                    if (a.author < b.author) return sortOrder === "asc" ? -1 : 1;
+                }
+            }
+
+        }).slice((page - 1) * limit, (page - 1) * limit + limit)};
+
+    let meta = {
         "page: ": page,
         "pages: ": Math.ceil(_articles.length / limit),
         "count: ": _articles.length,
-        "limit: ": limit
+        "limit: ": limit,
+        "items" :it
     }
-
-    let responseItem = 
-    {
-        "items": newArticles,
-        "meta": meta
-    }
-
-    cb(null, responseItem);
+      
+    cb(null, meta);
 }
 
 function read(req, res, payload, cb) {

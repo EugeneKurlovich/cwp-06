@@ -18,7 +18,12 @@
     "title" : "Ne",
     "text" : "textNews2",
     "date" : "Dec 25, 2017",
-    "author" : "Zhenya"
-    
+    "author" : "Zhenya",
+  "Comments" :
+[
+{
+ "author": "qwe"
+}
+]  
   }
 ]

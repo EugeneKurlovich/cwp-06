@@ -1,25 +1,35 @@
-2017-10-30 19:37:33: 
+2017-10-30 20:43:27: 
 /api/articles/readAll
 {
 	"sortField" : "id",
 	"sortOrder" : "asc",
-	"limit" : 1
+	"includeDeps" : false
 }
-2017-10-30 19:39:01: 
+2017-10-30 20:43:35: 
 /api/articles/readAll
 {
 	"sortField" : "id",
 	"sortOrder" : "asc",
-	"limit" : 1,
-	"page" : 2,
-	"pages" : 3
+	"includeDeps" : true
 }
-2017-10-30 19:39:38: 
+2017-10-30 20:43:42: 
 /api/articles/readAll
 {
 	"sortField" : "id",
 	"sortOrder" : "asc",
-	"limit" : 2,
-	"page" : 2,
-	"pages" : 3
+	"includeDeps" : false
+}
+2017-10-30 20:43:49: 
+/api/articles/readAll
+{
+	"sortField" : "id",
+	"sortOrder" : "asc",
+	"includeDeps" : true
+}
+2017-10-30 20:43:58: 
+/api/articles/readAll
+{
+	"sortField" : "id",
+	"sortOrder" : "desc",
+	"includeDeps" : true
 }
